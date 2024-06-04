@@ -45,7 +45,6 @@
     }
     # Picking whether to fill or not.
     aesthetics <- c("fill", "colour")[c(fill, colour)]
-
     if (fill) {
         VIRIDFUN <- scale_fill_viridis
         SCALEFUN <- scale_fill_manual

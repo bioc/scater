@@ -249,8 +249,8 @@ NULL
             }
         }
         plot_out <- .resolve_plot_colours(
-            plot_out, object$colour_by, colour_by, fill = point_out$fill,
-            colour = !point_out$fill, do_bin = !is.null(bins)
+            plot_out, object$colour_by, colour_by, fill = !is.null(fill_by) || point_out$fill,
+            colour = !is.null(colour_by), do_bin = !is.null(bins)
         )
     }
 
