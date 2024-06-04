@@ -37,6 +37,7 @@ Defaults to \code{TRUE}.}
 Defaults to \code{FALSE}.}
 \item{\code{show_se}:}{Logical, should standard errors for the fitted line be shown on a scatter plot when \code{show_smooth=TRUE}?
 Defaults to \code{TRUE}.}
+\item{\code{show_boxplot}:}{Logical, should a box plot be shown? Defaults to \code{FALSE}.}
 }
 }
 

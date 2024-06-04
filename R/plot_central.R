@@ -30,6 +30,7 @@
 #' Defaults to \code{FALSE}.}
 #' \item{\code{show_se}:}{Logical, should standard errors for the fitted line be shown on a scatter plot when \code{show_smooth=TRUE}?
 #' Defaults to \code{TRUE}.}
+#' \item{\code{show_boxplot}:}{Logical, should a box plot be shown? Defaults to \code{FALSE}.}
 #' }
 #'
 #' @section Miscellaneous fields: Addititional fields can be added to the
@@ -63,7 +64,7 @@ NULL
 #' @importFrom ggbeeswarm geom_quasirandom
 #' @importFrom ggplot2 ggplot geom_violin xlab ylab stat_summary geom_jitter
 #'   position_jitter coord_flip geom_point stat_smooth geom_tile theme_bw theme
-#'   geom_bin2d geom_hex stat_summary_2d stat_summary_hex
+#'   geom_bin2d geom_hex stat_summary_2d stat_summary_hex geom_boxplot
 .central_plotter <- function(object, xlab = NULL, ylab = NULL,
                              colour_by = NULL, shape_by = NULL, size_by = NULL, fill_by = NULL,
                              show_median = FALSE, show_violin = TRUE, show_smooth = FALSE, show_se = TRUE,
@@ -71,7 +72,7 @@ NULL
                              theme_size = 10, point_alpha = 0.6, point_size = NULL, point_shape = 19, add_legend = TRUE,
                              point_FUN = NULL, jitter_type = "swarm",
                              rasterise = FALSE, scattermore = FALSE, bins = NULL,
-                             summary_fun = "sum", hex = FALSE)
+                             summary_fun = "sum", hex = FALSE, show_boxplot = FALSE)
 # Internal ggplot-creating function to plot anything that involves points.
 # Creates either a scatter plot, (horizontal) violin plots, or a rectangle plot.
 {
@@ -101,6 +102,28 @@ NULL
                     geom_violin,
                     c(viol_args, list(colour = "gray60", alpha = 0.2, scale = "width", width = 0.8))
                 )
+        }
+        # Adding box plot
+        if (show_boxplot) {
+            if (is.null(fill_by)) {
+                box_args <- list(fill="grey90")
+            } else {
+                box_args <- list(mapping=aes(fill=.data[[fill_by]]))
+            }
+            # If violin plot is plotted, make the width of box plot smaller to
+            # improve readability.
+            if (show_violin) {
+                box_args[["width"]] <- 0.25
+            }
+            box_args <- c(box_args, list(colour = "black", alpha = 0.2))
+            # If user wants that jitter plot is not added, add outliers.
+            # Otherwise remove outliers since then they would be plotted twice;
+            # once as outlier and once as part of jitter plot.
+            if (!is.na(point_shape)) {
+                box_args[["outlier.shape"]] <- NA
+            }
+            plot_out <- plot_out +
+                do.call(geom_boxplot, box_args)
         }
 
         # Adding median, if requested.
