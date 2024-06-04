@@ -15,7 +15,7 @@ Authors@R: c(
 	        email = "tuomas.v.borman@utu.fi",
             comment = c(ORCID = "0000-0002-8563-8884"))
 	)
-Version: 1.31.3
+Version: 1.33.1
 Date: 2024-06-04
 License: GPL-3
 Title: Single-Cell Analysis Toolkit for Gene Expression Data in R
