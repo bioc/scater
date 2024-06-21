@@ -36,8 +36,7 @@
 #' @param summary_fun Function to summarize the feature value of each point
 #'   (e.g. gene expression of each cell) when the points binned, defaults to
 #'   \code{sum}. Can be either the name of the function or the function itself.
-#' @param hex Logical, whether to use \code{\link{geom_hex}}. Note that
-#'   \code{geom_hex} is broken in \code{ggplot2} version 3.4.0.
+#' @param hex Logical, whether to use \code{\link{geom_hex}}.
 #' @param ... Additional arguments for visualization, see
 #'   \code{?"\link{scater-plot-args}"} for details.
 #'
