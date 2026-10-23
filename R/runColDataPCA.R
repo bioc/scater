@@ -79,7 +79,7 @@ runColDataPCA <- function(x, ncomponents = 2,
     }
 
     pcs <- pca$x
-    attr(pcs, "percentVar") <- percentVar
+    attr(pcs, "percentVar") <- percentVar * 100
     reducedDim(x, name) <- pcs
     x
 }

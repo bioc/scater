@@ -109,7 +109,7 @@ plotColData <- function(object, y, x = NULL,
         x_by_out <- retrieveCellInfo(object, x, search = "colData")
         x_lab <- x_by_out$name
         if (is.null(x_lab)) {
-            stop(sprintf("could not find '%s' in 'rowData(object)'", x))
+            stop(sprintf("could not find '%s' in 'colData(object)'", x))
         }
         df_to_plot$X <- x_by_out$value
     } else {

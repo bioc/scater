@@ -182,6 +182,8 @@ test_that("runColDataPCA works as expected for QC metrics", {
     expect_warning(normed <- runColDataPCA(normed, variables = vars, outliers = TRUE), NA)
     expect_type(normed$outlier, "logical")
     expect_identical(length(normed$outlier), ncol(normed))
+
+    expect_true(sum(attr(reducedDim(normed, "PCA_coldata"), "percentVar")) > 1)
 })
 
 test_that("runPCA works with irlba code", {
